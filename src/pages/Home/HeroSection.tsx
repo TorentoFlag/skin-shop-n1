@@ -91,6 +91,8 @@ export function HeroSection() {
       </div>
       </div>
 
+      {/* Gradient fade to main bg */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#0f0f1a] pointer-events-none" />
     </section>
   );
 }
