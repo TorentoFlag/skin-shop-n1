@@ -46,7 +46,7 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalPr
             <div className="bg-[#1a1a2e] border border-[#3a3a5a] rounded-2xl shadow-[0_25px_50px_rgba(0,0,0,0.5)] overflow-hidden">
               {title && (
                 <div className="flex items-center justify-between p-6 border-b border-[#3a3a5a]">
-                  <h2 className="text-xl font-semibold text-white font-['Rajdhani']">{title}</h2>
+                  <h2 className="text-xl font-semibold text-white font-exo2">{title}</h2>
                   <button onClick={onClose} className="text-[#6b6b7b] hover:text-white transition p-1">
                     <MdClose size={20} />
                   </button>

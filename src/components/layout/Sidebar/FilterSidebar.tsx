@@ -57,7 +57,7 @@ export function FilterSidebar() {
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
-          <h3 className="font-bold text-white font-['Rajdhani'] text-lg">{t('filter.title')}</h3>
+          <h3 className="font-bold text-white font-exo2 text-lg">{t('filter.title')}</h3>
           {activeCount > 0 && (
             <span className="px-2 py-0.5 bg-[#00d9ff]/20 text-[#00d9ff] text-xs rounded-full border border-[#00d9ff]/30 font-medium">
               {activeCount}

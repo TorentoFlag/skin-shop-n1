@@ -34,7 +34,7 @@ export function Wishlist() {
         {/* Header */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-3xl font-bold font-['Rajdhani'] text-white flex items-center gap-3">
+            <h1 className="text-3xl font-bold font-exo2 text-white flex items-center gap-3">
               <FiHeart className="text-[#ff6b6b]" size={28} />
               {t('title')}
             </h1>

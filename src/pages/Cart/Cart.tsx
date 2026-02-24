@@ -29,7 +29,7 @@ export function Cart() {
       <div className="max-w-[1200px] mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold font-['Rajdhani'] text-white">{t('title')}</h1>
+            <h1 className="text-3xl font-bold font-exo2 text-white">{t('title')}</h1>
             <p className="text-[#6b6b7b] mt-1">{t('common:item', { count: items.length })}</p>
           </div>
           {items.length > 0 && (
@@ -70,7 +70,7 @@ export function Cart() {
             {/* Summary */}
             <div className="h-fit sticky top-[90px]">
               <div className="bg-[#1a1a2e] rounded-2xl border border-[#3a3a5a] p-6 space-y-4">
-                <h2 className="font-bold text-white font-['Rajdhani'] text-xl">{t('orderSummary')}</h2>
+                <h2 className="font-bold text-white font-exo2 text-xl">{t('orderSummary')}</h2>
 
                 <div className="space-y-2">
                   {items.map(item => (

@@ -36,7 +36,7 @@ export function CartSidebar() {
             <div className="flex items-center justify-between p-5 border-b border-[#3a3a5a]">
               <div className="flex items-center gap-3">
                 <FiShoppingCart size={20} className="text-[#00d9ff]" />
-                <h2 className="font-bold text-white font-['Rajdhani'] text-xl">{t('title')}</h2>
+                <h2 className="font-bold text-white font-exo2 text-xl">{t('title')}</h2>
                 {items.length > 0 && (
                   <span className="px-2 py-0.5 bg-[#00d9ff]/20 text-[#00d9ff] text-xs rounded-full border border-[#00d9ff]/30">
                     {items.reduce((s, i) => s + i.quantity, 0)} {t('items')}

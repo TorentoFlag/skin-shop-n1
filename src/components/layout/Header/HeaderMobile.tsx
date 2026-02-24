@@ -67,7 +67,7 @@ export function HeaderMobile() {
     <>
       <header className="fixed top-0 left-0 right-0 h-[60px] bg-[#0f0f1a]/90 backdrop-blur-md z-50 border-b border-[#3a3a5a]">
         <div className="flex items-center justify-between px-4 h-full">
-          <Link to="/" className="text-xl font-bold font-['Rajdhani'] bg-gradient-to-r from-[#00d9ff] to-[#00ff88] bg-clip-text text-transparent">
+          <Link to="/" className="text-xl font-bold font-exo2 bg-gradient-to-r from-[#00d9ff] to-[#00ff88] bg-clip-text text-transparent">
             SkinVault
           </Link>
 
@@ -172,7 +172,7 @@ export function HeaderMobile() {
               className="fixed top-0 right-0 h-full w-72 bg-[#1a1a2e] border-l border-[#3a3a5a] z-50 flex flex-col"
             >
               <div className="flex items-center justify-between p-5 border-b border-[#3a3a5a]">
-                <span className="font-['Rajdhani'] text-xl font-bold gradient-text">SkinVault</span>
+                <span className="font-exo2 text-xl font-bold gradient-text">SkinVault</span>
                 <div className="flex items-center gap-2">
                   <LanguageSwitcher />
                   <CurrencySwitcher />

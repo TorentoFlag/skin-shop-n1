@@ -77,7 +77,7 @@ export function HeaderDesktop() {
 
         {/* Logo */}
         <Link to="/" className="flex-shrink-0">
-          <span className="text-2xl font-bold font-['Rajdhani'] bg-gradient-to-r from-[#00d9ff] to-[#00ff88] bg-clip-text text-transparent">
+          <span className="text-2xl font-bold font-exo2 bg-gradient-to-r from-[#00d9ff] to-[#00ff88] bg-clip-text text-transparent">
             SkinVault
           </span>
         </Link>

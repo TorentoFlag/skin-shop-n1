@@ -31,7 +31,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-5xl tablet:text-6xl laptop:text-7xl font-bold font-['Rajdhani'] leading-tight mb-4"
+          className="text-5xl tablet:text-6xl laptop:text-7xl font-bold font-exo2 leading-tight mb-4"
         >
           <span className="text-white">{t('hero.titleLine1')}</span>
           <br />
@@ -83,7 +83,7 @@ export function HeroSection() {
           ].map(stat => (
             <div key={stat.label} className="flex flex-col items-center gap-1 p-4 bg-[#252540]/50 rounded-xl border border-[#3a3a5a]">
               <div className="text-[#00d9ff] text-xl">{stat.icon}</div>
-              <div className="text-white font-bold font-['Rajdhani'] text-2xl">{stat.value}</div>
+              <div className="text-white font-bold font-exo2 text-2xl">{stat.value}</div>
               <div className="text-[#6b6b7b] text-xs">{stat.label}</div>
             </div>
           ))}

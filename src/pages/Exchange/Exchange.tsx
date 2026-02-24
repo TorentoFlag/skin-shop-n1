@@ -23,7 +23,7 @@ export function Exchange() {
       </div>
 
       {/* Title */}
-      <h1 className="text-3xl tablet:text-4xl font-bold font-['Rajdhani'] text-white mb-3">
+      <h1 className="text-3xl tablet:text-4xl font-bold font-exo2 text-white mb-3">
         {t('title')}
       </h1>
       <p className="text-[#a0a0b0] max-w-md mb-8 leading-relaxed">

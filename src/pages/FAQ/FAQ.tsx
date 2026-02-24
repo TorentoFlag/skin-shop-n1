@@ -140,7 +140,7 @@ export function FAQ() {
       <div className="max-w-[1600px] mx-auto px-4 laptop:px-8">
         {/* Page header */}
         <div className="mb-6">
-          <h1 className="text-3xl font-bold font-['Rajdhani'] text-white">
+          <h1 className="text-3xl font-bold font-exo2 text-white">
             {t('title')}
           </h1>
           <p className="text-[#6b6b7b] mt-1">{t('subtitle')}</p>
@@ -250,7 +250,7 @@ export function FAQ() {
                         <div key={section.id}>
                           <div className="flex items-center gap-2 mb-4">
                             <span className="text-[#00d9ff]">{section.icon}</span>
-                            <h2 className="text-lg font-bold font-['Rajdhani'] text-white">
+                            <h2 className="text-lg font-bold font-exo2 text-white">
                               {section.title}
                             </h2>
                           </div>
@@ -286,7 +286,7 @@ export function FAQ() {
                   {/* Section header */}
                   <div className="flex items-center gap-3 mb-6 p-4 bg-[#1a1a2e] rounded-xl border border-[#3a3a5a]">
                     <span className="text-[#00d9ff]">{currentSection.icon}</span>
-                    <h2 className="text-lg font-bold font-['Rajdhani'] text-white">
+                    <h2 className="text-lg font-bold font-exo2 text-white">
                       {currentSection.title}
                     </h2>
                     <span className="text-sm text-[#6b6b7b] ml-auto">

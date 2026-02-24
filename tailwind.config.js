@@ -37,7 +37,7 @@ export default {
         'rarity-consumer': '#b0c3d9',
       },
       fontFamily: {
-        'rajdhani': ['Rajdhani', 'sans-serif'],
+        'exo2': ['"Exo 2"', 'sans-serif'],
         'inter': ['Inter', 'sans-serif'],
         'orbitron': ['Orbitron', 'sans-serif'],
       },

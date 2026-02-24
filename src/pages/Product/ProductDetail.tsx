@@ -102,7 +102,7 @@ export function ProductDetail() {
             {/* Title */}
             <div>
               <p className="text-[#a0a0b0] text-sm mb-1">{product.weapon}</p>
-              <h1 className="text-3xl laptop:text-4xl font-bold font-['Rajdhani'] text-white leading-tight">
+              <h1 className="text-3xl laptop:text-4xl font-bold font-exo2 text-white leading-tight">
                 {product.statTrak && <span className="text-[#e4ae39]">StatTrak™ </span>}
                 {product.name}
               </h1>
@@ -203,7 +203,7 @@ export function ProductDetail() {
             transition={{ delay: 0.3 }}
             className="mb-12 p-6 bg-[#1a1a2e] rounded-2xl border border-[#3a3a5a]"
           >
-            <h2 className="text-xl font-bold font-['Rajdhani'] text-white mb-6">{t('priceHistory')}</h2>
+            <h2 className="text-xl font-bold font-exo2 text-white mb-6">{t('priceHistory')}</h2>
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={product.priceHistory}>
                 <XAxis dataKey="date" tick={{ fill: '#6b6b7b', fontSize: 11 }} tickLine={false} axisLine={false} interval={6} />
@@ -221,7 +221,7 @@ export function ProductDetail() {
         {/* Similar skins */}
         {similarProducts.length > 0 && (
           <div>
-            <h2 className="text-2xl font-bold font-['Rajdhani'] text-white mb-6">{t('similarSkins')}</h2>
+            <h2 className="text-2xl font-bold font-exo2 text-white mb-6">{t('similarSkins')}</h2>
             <div className="grid grid-cols-2 laptop:grid-cols-4 gap-4">
               {similarProducts.map(p => (
                 <div key={p.id}><ProductCard product={p} /></div>

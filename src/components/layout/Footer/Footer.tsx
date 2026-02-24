@@ -28,7 +28,7 @@ export function Footer() {
         <div className="grid grid-cols-1 tablet:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1 tablet:col-span-1">
-            <div className="text-2xl font-bold font-['Rajdhani'] bg-gradient-to-r from-[#00d9ff] to-[#00ff88] bg-clip-text text-transparent mb-3">
+            <div className="text-2xl font-bold font-exo2 bg-gradient-to-r from-[#00d9ff] to-[#00ff88] bg-clip-text text-transparent mb-3">
               SkinVault
             </div>
             <p className="text-[#6b6b7b] text-sm leading-relaxed">
@@ -38,7 +38,7 @@ export function Footer() {
 
           {/* Marketplace */}
           <div>
-            <h4 className="font-semibold text-white mb-4 font-['Rajdhani'] text-lg">{t('shop.title')}</h4>
+            <h4 className="font-semibold text-white mb-4 font-exo2 text-lg">{t('shop.title')}</h4>
             <ul className="space-y-2">
               {(['all', 'rifles', 'pistols', 'smgs', 'heavy'] as const).map(key => (
                 <li key={key}>
@@ -50,7 +50,7 @@ export function Footer() {
 
           {/* Support */}
           <div>
-            <h4 className="font-semibold text-white mb-4 font-['Rajdhani'] text-lg">{t('support.title')}</h4>
+            <h4 className="font-semibold text-white mb-4 font-exo2 text-lg">{t('support.title')}</h4>
             <ul className="space-y-2">
               {[
                 { label: t('support.faq'), path: '/faq' },
@@ -66,7 +66,7 @@ export function Footer() {
 
           {/* Trust */}
           <div>
-            <h4 className="font-semibold text-white mb-4 font-['Rajdhani'] text-lg">{t('why.title')}</h4>
+            <h4 className="font-semibold text-white mb-4 font-exo2 text-lg">{t('why.title')}</h4>
             <div className="space-y-3">
               {([
                 { icon: '🔒', key: 'steamVerification' },

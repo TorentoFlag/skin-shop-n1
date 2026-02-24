@@ -75,7 +75,7 @@ export function Marketplace() {
       <div className="max-w-[1600px] mx-auto px-4 laptop:px-8">
         {/* Page header */}
         <div className="mb-6">
-          <h1 className="text-3xl font-bold font-['Rajdhani'] text-white">{t('title')}</h1>
+          <h1 className="text-3xl font-bold font-exo2 text-white">{t('title')}</h1>
           <p className="text-[#6b6b7b] mt-1">{t('skinsAvailable', { count: filtered.length })}</p>
         </div>
 
@@ -168,7 +168,7 @@ export function Marketplace() {
               className="fixed bottom-0 left-0 right-0 bg-[#1a1a2e] rounded-t-2xl z-50 max-h-[85vh] overflow-y-auto"
             >
               <div className="flex items-center justify-between p-5 border-b border-[#3a3a5a] sticky top-0 bg-[#1a1a2e] z-10">
-                <h3 className="font-bold text-white font-['Rajdhani'] text-xl">{t('common:filter.title')}</h3>
+                <h3 className="font-bold text-white font-exo2 text-xl">{t('common:filter.title')}</h3>
                 <button onClick={() => setSidebarOpen(false)} className="text-[#6b6b7b] hover:text-white">
                   <FiX size={20} />
                 </button>

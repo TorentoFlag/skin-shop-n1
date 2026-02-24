@@ -21,7 +21,7 @@ export function PopularSkins() {
           className="flex items-center justify-between mb-8"
         >
           <div>
-            <h2 className="text-3xl font-bold font-['Rajdhani'] text-white">{t('popular.title')}</h2>
+            <h2 className="text-3xl font-bold font-exo2 text-white">{t('popular.title')}</h2>
             <p className="text-[#6b6b7b] mt-1">{t('popular.subtitle')}</p>
           </div>
           <Link
@@ -57,7 +57,7 @@ export function PopularSkins() {
           className="flex items-center justify-between mb-8"
         >
           <div>
-            <h2 className="text-3xl font-bold font-['Rajdhani'] text-white">
+            <h2 className="text-3xl font-bold font-exo2 text-white">
               {t('newArrivals.title')} <span className="gradient-text">{t('newArrivals.titleAccent')}</span>
             </h2>
             <p className="text-[#6b6b7b] mt-1">{t('newArrivals.subtitle')}</p>
@@ -103,7 +103,7 @@ export function PopularSkins() {
               >
                 <div className="text-4xl">{item.icon}</div>
                 <div>
-                  <h3 className="font-bold text-white font-['Rajdhani'] text-lg mb-1">{t(`trust.${item.key}.title`)}</h3>
+                  <h3 className="font-bold text-white font-exo2 text-lg mb-1">{t(`trust.${item.key}.title`)}</h3>
                   <p className="text-[#6b6b7b] text-sm leading-relaxed">{t(`trust.${item.key}.desc`)}</p>
                 </div>
               </motion.div>
