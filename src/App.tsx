@@ -1,35 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import { Toaster } from 'react-hot-toast';
+import { Header } from './components/layout/Header/Header';
+import { Footer } from './components/layout/Footer/Footer';
+import { CartSidebar } from './components/cart/CartSidebar/CartSidebar';
+import { Home } from './pages/Home/Home';
+import { Marketplace } from './pages/Marketplace/Marketplace';
+import { ProductDetail } from './pages/Product/ProductDetail';
+import { Cart } from './pages/Cart/Cart';
+import { Wishlist } from './pages/Wishlist/Wishlist';
+import { NotFound } from './pages/NotFound/NotFound';
+import { FAQ } from './pages/FAQ/FAQ';
+import { Exchange } from './pages/Exchange/Exchange';
 
-function App() {
-  const [count, setCount] = useState(0)
+function AppRoutes() {
+  const location = useLocation();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Home />} />
+        <Route path="/marketplace" element={<Marketplace />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/exchange" element={<Exchange />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </AnimatePresence>
+  );
 }
 
-export default App
+function App() {
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen bg-[#0f0f1a] text-white font-['Inter'] overflow-x-hidden">
+        <Header />
+        <main>
+          <AppRoutes />
+        </main>
+        <Footer />
+        <CartSidebar />
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: '#1a1a2e',
+              color: '#fff',
+              border: '1px solid #3a3a5a',
+              borderRadius: '12px',
+              fontSize: '14px',
+            },
+          }}
+        />
+      </div>
+    </BrowserRouter>
+  );
+}
+
+export default App;
