@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
 import { Header } from './components/layout/Header/Header';
@@ -34,7 +34,7 @@ function AppRoutes() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="min-h-screen bg-[#0f0f1a] text-white font-['Inter'] overflow-x-hidden">
         <Header />
         <main>
@@ -56,7 +56,7 @@ function App() {
           }}
         />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
