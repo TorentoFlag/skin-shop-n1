@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FiShoppingCart } from 'react-icons/fi';
 import type { Product } from '../../../@types';
 import { useCartStore } from '../../../store/useCartStore';
-import { formatPrice } from '../../../utils/formatPrice';
+import { useFormatPrice } from '../../../utils/formatPrice';
 import { getRarityColor, getQualityColor } from '../../../utils/getRarityColor';
 import { QualityBadge, StatTrakBadge, DiscountBadge, NewBadge } from '../../common/Badge/Badge';
 import { WishlistButton } from '../../wishlist/WishlistButton/WishlistButton';
@@ -16,6 +16,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const { t } = useTranslation('product');
+  const { formatPrice } = useFormatPrice();
   const addItem = useCartStore(s => s.addItem);
   const rarityColor = getRarityColor(product.rarity);
 

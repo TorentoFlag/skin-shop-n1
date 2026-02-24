@@ -4,12 +4,13 @@ import { FiHeart, FiShoppingCart, FiTrash2 } from 'react-icons/fi';
 import { useWishlistStore } from '../../store/useWishlistStore';
 import { useCartStore } from '../../store/useCartStore';
 import { ProductCard } from '../../components/product/ProductCard/ProductCard';
-import { formatPriceFull } from '../../utils/formatPrice';
+import { useFormatPrice } from '../../utils/formatPrice';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
 export function Wishlist() {
   const { t } = useTranslation('wishlist');
+  const { formatPriceFull } = useFormatPrice();
   const { items, removeItem } = useWishlistStore();
   const addToCart = useCartStore(s => s.addItem);
 

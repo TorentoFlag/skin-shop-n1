@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FiChevronDown, FiX } from 'react-icons/fi';
 import { useFilterStore } from '../../../store/useFilterStore';
 import { getRarityColor, getQualityColor } from '../../../utils/getRarityColor';
-import { formatPrice } from '../../../utils/formatPrice';
+import { useFormatPrice } from '../../../utils/formatPrice';
 import { QUALITY_OPTIONS, RARITY_OPTIONS, WEAPON_OPTIONS, MAX_PRICE } from '../../../utils/constants';
 import { useTranslation } from 'react-i18next';
 
@@ -39,6 +39,7 @@ function AccordionSection({ title, children, defaultOpen = false }: { title: str
 
 export function FilterSidebar() {
   const { t } = useTranslation();
+  const { formatPrice } = useFormatPrice();
   const {
     priceRange, setPriceRange,
     qualities, toggleQuality,
@@ -108,7 +109,7 @@ export function FilterSidebar() {
             />
           </div>
           <div className="grid grid-cols-2 gap-2">
-            {[{ label: 'Under €50', range: [0, 50] }, { label: '€50–€500', range: [50, 500] }, { label: '€500–€2k', range: [500, 2000] }, { label: 'Over €2k', range: [2000, MAX_PRICE] }].map(({ label, range }) => {
+            {[{ label: `< ${formatPrice(50)}`, range: [0, 50] }, { label: `${formatPrice(50)}–${formatPrice(500)}`, range: [50, 500] }, { label: `${formatPrice(500)}–${formatPrice(2000)}`, range: [500, 2000] }, { label: `> ${formatPrice(2000)}`, range: [2000, MAX_PRICE] }].map(({ label, range }) => {
               const isActive = priceRange[0] === range[0] && priceRange[1] === range[1];
               return (
                 <button

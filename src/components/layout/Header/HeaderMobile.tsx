@@ -10,6 +10,8 @@ import { mockProducts } from '../../../data/mockProducts';
 import type { Product } from '../../../@types';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from '../../common/LanguageSwitcher/LanguageSwitcher';
+import { CurrencySwitcher } from '../../common/CurrencySwitcher/CurrencySwitcher';
+import { useFormatPrice } from '../../../utils/formatPrice';
 
 const RARITY_COLORS: Record<string, string> = {
   Covert: '#ff4444',
@@ -23,6 +25,7 @@ const RARITY_COLORS: Record<string, string> = {
 
 export function HeaderMobile() {
   const { t } = useTranslation();
+  const { formatPrice } = useFormatPrice();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [inputVal, setInputVal] = useState('');
@@ -140,7 +143,7 @@ export function HeaderMobile() {
                         </div>
                       </div>
                       <span className="text-[#00d9ff] text-sm font-bold flex-shrink-0">
-                        ${product.price.toFixed(2)}
+                        {formatPrice(product.price)}
                       </span>
                     </button>
                   )) : (
@@ -172,6 +175,7 @@ export function HeaderMobile() {
                 <span className="font-['Rajdhani'] text-xl font-bold gradient-text">SkinVault</span>
                 <div className="flex items-center gap-2">
                   <LanguageSwitcher />
+                  <CurrencySwitcher />
                   <button onClick={() => setMenuOpen(false)} className="text-[#a0a0b0]"><FiX size={22} /></button>
                 </div>
               </div>

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { FiTrash2 } from 'react-icons/fi';
 import type { CartItem as CartItemType } from '../../../@types';
 import { useCartStore } from '../../../store/useCartStore';
-import { formatPrice } from '../../../utils/formatPrice';
+import { useFormatPrice } from '../../../utils/formatPrice';
 import { QualityBadge } from '../../common/Badge/Badge';
 
 interface CartItemProps {
@@ -10,6 +10,7 @@ interface CartItemProps {
 }
 
 export function CartItemComponent({ item }: CartItemProps) {
+  const { formatPrice } = useFormatPrice();
   const { removeItem } = useCartStore();
   const { product } = item;
 

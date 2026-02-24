@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 import { FiShoppingCart, FiTrash2 } from 'react-icons/fi';
 import { useCartStore } from '../../store/useCartStore';
 import { CartItemComponent } from '../../components/cart/CartItem/CartItem';
-import { formatPriceFull } from '../../utils/formatPrice';
+import { useFormatPrice } from '../../utils/formatPrice';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
 export function Cart() {
   const { t } = useTranslation('cart');
+  const { formatPriceFull } = useFormatPrice();
   const { items, clearCart, getTotal } = useCartStore();
   const total = getTotal();
 

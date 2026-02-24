@@ -9,6 +9,8 @@ import { mockProducts } from '../../../data/mockProducts';
 import type { Product } from '../../../@types';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from '../../common/LanguageSwitcher/LanguageSwitcher';
+import { CurrencySwitcher } from '../../common/CurrencySwitcher/CurrencySwitcher';
+import { useFormatPrice } from '../../../utils/formatPrice';
 
 const RARITY_COLORS: Record<string, string> = {
   Covert: '#ff4444',
@@ -22,6 +24,7 @@ const RARITY_COLORS: Record<string, string> = {
 
 export function HeaderDesktop() {
   const { t } = useTranslation();
+  const { formatPrice } = useFormatPrice();
   const cartCount = useCartStore(s => s.getCount());
   const wishlistCount = useWishlistStore(s => s.getCount());
   const toggleCart = useCartStore(s => s.toggleCart);
@@ -141,7 +144,7 @@ export function HeaderDesktop() {
                     </div>
                   </div>
                   <span className="text-[#00d9ff] text-sm font-bold flex-shrink-0">
-                    ${product.price.toFixed(2)}
+                    {formatPrice(product.price)}
                   </span>
                 </button>
               )) : (
@@ -156,8 +159,9 @@ export function HeaderDesktop() {
 
         {/* Actions */}
         <div className="flex items-center gap-3">
-          {/* Language Switcher */}
+          {/* Language & Currency Switchers */}
           <LanguageSwitcher />
+          <CurrencySwitcher />
 
           {/* Wishlist */}
           <Link to="/wishlist" className="relative p-2 text-[#a0a0b0] hover:text-[#ff6b6b] transition-colors">

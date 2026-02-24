@@ -3,11 +3,12 @@ import { FiX, FiShoppingCart, FiTrash2 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { useCartStore } from '../../../store/useCartStore';
 import { CartItemComponent } from '../CartItem/CartItem';
-import { formatPriceFull } from '../../../utils/formatPrice';
+import { useFormatPrice } from '../../../utils/formatPrice';
 import { useTranslation } from 'react-i18next';
 
 export function CartSidebar() {
   const { t } = useTranslation('cart');
+  const { formatPriceFull } = useFormatPrice();
   const { items, isOpen, setCartOpen, clearCart, getTotal } = useCartStore();
 
   return (

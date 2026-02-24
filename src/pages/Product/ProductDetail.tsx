@@ -7,13 +7,14 @@ import { ProductCard } from '../../components/product/ProductCard/ProductCard';
 import { useCartStore } from '../../store/useCartStore';
 import { WishlistButton } from '../../components/wishlist/WishlistButton/WishlistButton';
 import { QualityBadge, RarityBadge, StatTrakBadge } from '../../components/common/Badge/Badge';
-import { formatPriceFull } from '../../utils/formatPrice';
+import { useFormatPrice } from '../../utils/formatPrice';
 import { getRarityColor, getQualityColor, getQualityLabel } from '../../utils/getRarityColor';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
 export function ProductDetail() {
   const { t } = useTranslation('product');
+  const { formatPriceFull } = useFormatPrice();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const product = allProducts.find(p => p.id === id);
@@ -206,10 +207,10 @@ export function ProductDetail() {
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={product.priceHistory}>
                 <XAxis dataKey="date" tick={{ fill: '#6b6b7b', fontSize: 11 }} tickLine={false} axisLine={false} interval={6} />
-                <YAxis tick={{ fill: '#6b6b7b', fontSize: 11 }} tickLine={false} axisLine={false} tickFormatter={v => `€${v.toFixed(0)}`} />
+                <YAxis tick={{ fill: '#6b6b7b', fontSize: 11 }} tickLine={false} axisLine={false} tickFormatter={v => formatPriceFull(v)} />
                 <Tooltip
                   contentStyle={{ background: '#252540', border: '1px solid #3a3a5a', borderRadius: '8px', color: '#fff' }}
-                  formatter={(val: number | undefined) => [`€${(val ?? 0).toFixed(2)}`, t('priceLabel')]}
+                  formatter={(val: number | undefined) => [formatPriceFull(val ?? 0), t('priceLabel')]}
                 />
                 <Line type="monotone" dataKey="price" stroke="#00d9ff" strokeWidth={2} dot={false} activeDot={{ r: 4, fill: '#00d9ff' }} />
               </LineChart>
