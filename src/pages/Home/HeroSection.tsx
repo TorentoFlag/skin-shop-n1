@@ -7,7 +7,7 @@ export function HeroSection() {
   const { t } = useTranslation('home');
 
   return (
-    <section className="relative min-h-[85vh] flex flex-col overflow-hidden animated-gradient pt-[60px] laptop:pt-[70px]">
+    <section className="relative min-h-[85vh] flex flex-col overflow-hidden animated-gradient pt-hero">
       {/* Decorative neon circles */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#00d9ff]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[#00ff88]/5 rounded-full blur-3xl pointer-events-none" />

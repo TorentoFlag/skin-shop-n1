@@ -135,7 +135,7 @@ export function FAQ() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen pt-[90px] pb-10"
+      className="min-h-screen pt-page pb-10"
     >
       <div className="max-w-[1600px] mx-auto px-4 laptop:px-8">
         {/* Page header */}

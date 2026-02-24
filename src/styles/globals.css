@@ -82,6 +82,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Safe area support (iPhone Dynamic Island / notch) */
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.pt-page {
+  padding-top: calc(90px + env(safe-area-inset-top, 0px));
+}
+
+.pt-hero {
+  padding-top: calc(60px + env(safe-area-inset-top, 0px));
+}
+
+@media (min-width: 1024px) {
+  .pt-hero {
+    padding-top: calc(70px + env(safe-area-inset-top, 0px));
+  }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

@@ -9,7 +9,7 @@ export function NotFound() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen pt-[90px] flex flex-col items-center justify-center text-center px-4"
+      className="min-h-screen pt-page flex flex-col items-center justify-center text-center px-4"
     >
       <div className="text-8xl font-bold font-['Orbitron'] gradient-text mb-4">404</div>
       <h2 className="text-2xl font-bold text-white mb-2">{t('notFound.title')}</h2>

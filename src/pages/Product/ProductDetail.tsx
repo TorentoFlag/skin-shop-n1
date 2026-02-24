@@ -23,7 +23,7 @@ export function ProductDetail() {
 
   if (!product) {
     return (
-      <div className="min-h-screen pt-[90px] flex flex-col items-center justify-center text-center px-4">
+      <div className="min-h-screen pt-page flex flex-col items-center justify-center text-center px-4">
         <div className="text-6xl mb-4">😕</div>
         <h2 className="text-2xl font-bold text-white mb-2">{t('notFound.title')}</h2>
         <p className="text-[#6b6b7b] mb-6">{t('notFound.desc')}</p>
@@ -51,7 +51,7 @@ export function ProductDetail() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="min-h-screen pt-[90px] pb-16 px-4 laptop:px-8"
+      className="min-h-screen pt-page pb-16 px-4 laptop:px-8"
     >
       <div className="max-w-[1400px] mx-auto">
         {/* Breadcrumbs */}

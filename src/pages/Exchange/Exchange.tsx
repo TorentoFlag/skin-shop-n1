@@ -10,7 +10,7 @@ export function Exchange() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen pt-[90px] flex flex-col items-center justify-center text-center px-4 pb-20"
+      className="min-h-screen pt-page flex flex-col items-center justify-center text-center px-4 pb-20"
     >
       {/* Icon */}
       <div className="relative mb-8">

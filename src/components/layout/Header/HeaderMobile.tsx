@@ -65,8 +65,8 @@ export function HeaderMobile() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 h-[60px] bg-[#0f0f1a]/90 backdrop-blur-md z-50 border-b border-[#3a3a5a]">
-        <div className="flex items-center justify-between px-4 h-full">
+      <header className="fixed top-0 left-0 right-0 bg-[#0f0f1a]/90 backdrop-blur-md z-50 border-b border-[#3a3a5a] safe-top">
+        <div className="flex items-center justify-between px-4 h-[60px]">
           <Link to="/" className="text-xl font-bold font-exo2 bg-gradient-to-r from-[#00d9ff] to-[#00ff88] bg-clip-text text-transparent">
             SkinVault
           </Link>
@@ -171,12 +171,14 @@ export function HeaderMobile() {
               transition={{ type: 'tween', duration: 0.3 }}
               className="fixed top-0 right-0 h-full w-72 bg-[#1a1a2e] border-l border-[#3a3a5a] z-50 flex flex-col"
             >
-              <div className="flex items-center justify-between p-5 border-b border-[#3a3a5a]">
-                <span className="font-exo2 text-xl font-bold gradient-text">SkinVault</span>
-                <div className="flex items-center gap-2">
+              <div className="p-5 border-b border-[#3a3a5a]">
+                <div className="flex items-center justify-between">
+                  <span className="font-exo2 text-xl font-bold gradient-text">SkinVault</span>
+                  <button onClick={() => setMenuOpen(false)} className="text-[#a0a0b0]"><FiX size={22} /></button>
+                </div>
+                <div className="flex items-center gap-3 mt-3">
                   <LanguageSwitcher />
                   <CurrencySwitcher />
-                  <button onClick={() => setMenuOpen(false)} className="text-[#a0a0b0]"><FiX size={22} /></button>
                 </div>
               </div>
 
