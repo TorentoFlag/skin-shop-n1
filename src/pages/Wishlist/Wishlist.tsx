@@ -6,14 +6,17 @@ import { useCartStore } from '../../store/useCartStore';
 import { ProductCard } from '../../components/product/ProductCard/ProductCard';
 import { formatPriceFull } from '../../utils/formatPrice';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 export function Wishlist() {
+  const { t } = useTranslation('wishlist');
   const { items, removeItem } = useWishlistStore();
   const addToCart = useCartStore(s => s.addItem);
 
   function handleAddAllToCart() {
-    items.filter(p => p.inStock).forEach(p => addToCart(p));
-    toast.success(`Добавлено ${items.filter(p => p.inStock).length} товаров в корзину`, {
+    const inStockItems = items.filter(p => p.inStock);
+    inStockItems.forEach(p => addToCart(p));
+    toast.success(t('common:item', { count: inStockItems.length }) + ' ' + t('common:actions.addAllToCart').toLowerCase(), {
       style: { background: '#1a1a2e', color: '#fff', border: '1px solid #3a3a5a' },
     });
   }
@@ -32,11 +35,11 @@ export function Wishlist() {
           <div>
             <h1 className="text-3xl font-bold font-['Rajdhani'] text-white flex items-center gap-3">
               <FiHeart className="text-[#ff6b6b]" size={28} />
-              Избранное
+              {t('title')}
             </h1>
             <p className="text-[#6b6b7b] mt-1">
-              {items.length} {items.length === 1 ? 'скин' : items.length < 5 ? 'скина' : 'скинов'} сохранено
-              {items.length > 0 && ` • Общая стоимость: ${formatPriceFull(totalValue)}`}
+              {t('common:skin', { count: items.length })} {t('saved')}
+              {items.length > 0 && ` • ${t('totalValue', { value: formatPriceFull(totalValue) })}`}
             </p>
           </div>
 
@@ -46,7 +49,7 @@ export function Wishlist() {
                 onClick={handleAddAllToCart}
                 className="flex items-center gap-2 bg-gradient-to-r from-[#00d9ff] to-[#00ff88] px-5 py-2.5 rounded-xl text-black font-semibold hover:shadow-[0_0_20px_rgba(0,217,255,0.4)] transition"
               >
-                <FiShoppingCart size={16} /> Добавить всё в корзину
+                <FiShoppingCart size={16} /> {t('common:actions.addAllToCart')}
               </button>
             </div>
           )}
@@ -59,13 +62,13 @@ export function Wishlist() {
             className="flex flex-col items-center justify-center py-24 text-center"
           >
             <div className="text-7xl mb-6">💔</div>
-            <h2 className="text-2xl font-bold text-white mb-2">Список желаемого пуст</h2>
-            <p className="text-[#6b6b7b] mb-8">Сохраняйте понравившиеся скины, нажимая на иконку сердца</p>
+            <h2 className="text-2xl font-bold text-white mb-2">{t('empty.title')}</h2>
+            <p className="text-[#6b6b7b] mb-8">{t('empty.desc')}</p>
             <Link
               to="/marketplace"
               className="flex items-center gap-2 bg-gradient-to-r from-[#ff6b6b] to-[#ff44ff] px-8 py-3 rounded-xl text-white font-bold hover:shadow-[0_0_25px_rgba(255,107,107,0.4)] transition-all"
             >
-              <FiHeart size={18} /> Смотреть скины
+              <FiHeart size={18} /> {t('common:actions.browseSkins')}
             </Link>
           </motion.div>
         ) : (
@@ -83,7 +86,7 @@ export function Wishlist() {
                 <button
                   onClick={() => removeItem(product.id)}
                   className="absolute top-3 left-3 z-20 p-1.5 bg-[#ff4444]/80 text-white rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
-                  title="Удалить из избранного"
+                  title={t('common:actions.removeFromWishlist')}
                 >
                   <FiTrash2 size={12} />
                 </button>

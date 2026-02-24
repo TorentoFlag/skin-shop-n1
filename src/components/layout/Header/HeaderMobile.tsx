@@ -8,6 +8,8 @@ import { useWishlistStore } from '../../../store/useWishlistStore';
 import { useFilterStore } from '../../../store/useFilterStore';
 import { mockProducts } from '../../../data/mockProducts';
 import type { Product } from '../../../@types';
+import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from '../../common/LanguageSwitcher/LanguageSwitcher';
 
 const RARITY_COLORS: Record<string, string> = {
   Covert: '#ff4444',
@@ -20,6 +22,7 @@ const RARITY_COLORS: Record<string, string> = {
 };
 
 export function HeaderMobile() {
+  const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [inputVal, setInputVal] = useState('');
@@ -103,7 +106,7 @@ export function HeaderMobile() {
                     onChange={e => setInputVal(e.target.value)}
                     onKeyDown={e => e.key === 'Escape' && (setSearchOpen(false), setInputVal(''))}
                     className="w-full bg-[#1a1a2e] border border-[#3a3a5a] rounded-lg pl-9 pr-4 py-2.5 text-sm text-white placeholder-[#6b6b7b] focus:border-[#00d9ff] outline-none"
-                    placeholder="Поиск скинов..."
+                    placeholder={t('search.placeholder')}
                   />
                 </div>
               </form>
@@ -143,7 +146,7 @@ export function HeaderMobile() {
                   )) : (
                     <div className="px-4 py-5 text-center">
                       <FiSearch className="mx-auto mb-2 text-[#6b6b7b]" size={20} />
-                      <p className="text-sm text-[#6b6b7b]">Ничего не найдено по запросу «{inputVal.trim()}»</p>
+                      <p className="text-sm text-[#6b6b7b]">{t('search.noResults', { query: inputVal.trim() })}</p>
                     </div>
                   )}
                 </div>
@@ -167,30 +170,33 @@ export function HeaderMobile() {
             >
               <div className="flex items-center justify-between p-5 border-b border-[#3a3a5a]">
                 <span className="font-['Rajdhani'] text-xl font-bold gradient-text">SkinVault</span>
-                <button onClick={() => setMenuOpen(false)} className="text-[#a0a0b0]"><FiX size={22} /></button>
+                <div className="flex items-center gap-2">
+                  <LanguageSwitcher />
+                  <button onClick={() => setMenuOpen(false)} className="text-[#a0a0b0]"><FiX size={22} /></button>
+                </div>
               </div>
 
               <nav className="flex-1 p-5 flex flex-col gap-2">
                 <Link to="/" onClick={() => setMenuOpen(false)} className={`flex items-center gap-3 px-4 py-3 rounded-xl hover:text-white hover:bg-[#252540] transition ${pathname === '/' ? 'text-white bg-[#252540]' : 'text-[#a0a0b0]'}`}>
-                  <FiHome size={18} /> Главная
+                  <FiHome size={18} /> {t('nav.home')}
                 </Link>
                 <Link to="/marketplace" onClick={() => setMenuOpen(false)} className={`flex items-center gap-3 px-4 py-3 rounded-xl hover:text-white hover:bg-[#252540] transition ${pathname === '/marketplace' ? 'text-white bg-[#252540]' : 'text-[#a0a0b0]'}`}>
-                  <FiGrid size={18} /> Магазин
+                  <FiGrid size={18} /> {t('nav.shop')}
                 </Link>
                 <Link to="/exchange" onClick={() => setMenuOpen(false)} className={`flex items-center gap-3 px-4 py-3 rounded-xl hover:text-white hover:bg-[#252540] transition ${pathname === '/exchange' ? 'text-white bg-[#252540]' : 'text-[#a0a0b0]'}`}>
-                  <FiRefreshCw size={18} /> Обмен
+                  <FiRefreshCw size={18} /> {t('nav.exchange')}
                 </Link>
                 <Link to="/wishlist" onClick={() => setMenuOpen(false)} className={`flex items-center gap-3 px-4 py-3 rounded-xl hover:text-white hover:bg-[#252540] transition ${pathname === '/wishlist' ? 'text-white bg-[#252540]' : 'text-[#a0a0b0]'}`}>
-                  <FiHeart size={18} /> Избранное
+                  <FiHeart size={18} /> {t('nav.wishlist')}
                 </Link>
                 <Link to="/faq" onClick={() => setMenuOpen(false)} className={`flex items-center gap-3 px-4 py-3 rounded-xl hover:text-white hover:bg-[#252540] transition ${pathname === '/faq' ? 'text-white bg-[#252540]' : 'text-[#a0a0b0]'}`}>
-                  <FiHelpCircle size={18} /> FAQ
+                  <FiHelpCircle size={18} /> {t('nav.faq')}
                 </Link>
               </nav>
 
               <div className="p-5 border-t border-[#3a3a5a]">
                 <button className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-[#00d9ff] to-[#00ff88] px-4 py-3 rounded-xl text-black font-semibold">
-                  <SiSteam size={18} /> Войти через Steam
+                  <SiSteam size={18} /> {t('auth.loginSteam')}
                 </button>
               </div>
             </motion.div>

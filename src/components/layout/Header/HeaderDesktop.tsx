@@ -7,6 +7,8 @@ import { useFilterStore } from '../../../store/useFilterStore';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { mockProducts } from '../../../data/mockProducts';
 import type { Product } from '../../../@types';
+import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from '../../common/LanguageSwitcher/LanguageSwitcher';
 
 const RARITY_COLORS: Record<string, string> = {
   Covert: '#ff4444',
@@ -19,6 +21,7 @@ const RARITY_COLORS: Record<string, string> = {
 };
 
 export function HeaderDesktop() {
+  const { t } = useTranslation();
   const cartCount = useCartStore(s => s.getCount());
   const wishlistCount = useWishlistStore(s => s.getCount());
   const toggleCart = useCartStore(s => s.toggleCart);
@@ -79,15 +82,15 @@ export function HeaderDesktop() {
         {/* Nav */}
         <nav className="hidden laptop:flex items-center gap-8 text-[#a0a0b0]">
           <Link to="/marketplace" className={`hover:text-[#00d9ff] transition-colors duration-200 text-sm font-medium relative group ${pathname === '/marketplace' ? 'text-[#00d9ff]' : ''}`}>
-            Маркет
+            {t('nav.market')}
             <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#00d9ff] transition-all duration-200 ${pathname === '/marketplace' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
           </Link>
           <Link to="/exchange" className={`hover:text-[#00d9ff] transition-colors duration-200 text-sm font-medium relative group ${pathname === '/exchange' ? 'text-[#00d9ff]' : ''}`}>
-            Обмен
+            {t('nav.exchange')}
             <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#00d9ff] transition-all duration-200 ${pathname === '/exchange' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
           </Link>
           <Link to="/faq" className={`hover:text-[#00d9ff] transition-colors duration-200 text-sm font-medium relative group ${pathname === '/faq' ? 'text-[#00d9ff]' : ''}`}>
-            FAQ
+            {t('nav.faq')}
             <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#00d9ff] transition-all duration-200 ${pathname === '/faq' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
           </Link>
         </nav>
@@ -103,7 +106,7 @@ export function HeaderDesktop() {
                 onFocus={() => inputVal.trim().length >= 2 && setOpen(true)}
                 onKeyDown={e => e.key === 'Escape' && setOpen(false)}
                 className="w-full bg-[#1a1a2e] border border-[#3a3a5a] rounded-lg pl-9 pr-4 py-2 text-sm text-white placeholder-[#6b6b7b] focus:border-[#00d9ff] focus:shadow-[0_0_15px_rgba(0,217,255,0.3)] outline-none transition-all duration-200"
-                placeholder="Поиск скинов..."
+                placeholder={t('search.placeholder')}
               />
             </div>
           </form>
@@ -144,7 +147,7 @@ export function HeaderDesktop() {
               )) : (
                 <div className="px-4 py-5 text-center">
                   <FiSearch className="mx-auto mb-2 text-[#6b6b7b]" size={20} />
-                  <p className="text-sm text-[#6b6b7b]">Ничего не найдено по запросу «{inputVal.trim()}»</p>
+                  <p className="text-sm text-[#6b6b7b]">{t('search.noResults', { query: inputVal.trim() })}</p>
                 </div>
               )}
             </div>
@@ -153,6 +156,9 @@ export function HeaderDesktop() {
 
         {/* Actions */}
         <div className="flex items-center gap-3">
+          {/* Language Switcher */}
+          <LanguageSwitcher />
+
           {/* Wishlist */}
           <Link to="/wishlist" className="relative p-2 text-[#a0a0b0] hover:text-[#ff6b6b] transition-colors">
             <FiHeart size={20} />
@@ -176,7 +182,7 @@ export function HeaderDesktop() {
           {/* Steam Login */}
           <button className="hidden laptop:flex items-center gap-2 bg-gradient-to-r from-[#00d9ff] to-[#00ff88] px-4 py-2 rounded-lg text-black font-semibold text-sm hover:shadow-[0_0_20px_rgba(0,217,255,0.5)] transition-all duration-200 hover:opacity-90">
             <SiSteam size={16} />
-            Войти через Steam
+            {t('auth.loginSteam')}
           </button>
         </div>
       </div>

@@ -1,14 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import { useFilterStore } from '../../../store/useFilterStore';
+import { useTranslation } from 'react-i18next';
 
 const categoryWeapons: Record<string, string[]> = {
-  'Винтовки': ['AK-47', 'M4A4', 'M4A1-S', 'AWP', 'SG 553', 'FAMAS', 'Galil AR', 'Scout'],
-  'Пистолеты': ['USP-S', 'Glock-18', 'Desert Eagle'],
-  'Пистолеты-пулемёты': ['MP9', 'MAC-10', 'P90'],
-  'Тяжёлое': ['Nova', 'XM1014'],
+  rifles: ['AK-47', 'M4A4', 'M4A1-S', 'AWP', 'SG 553', 'FAMAS', 'Galil AR', 'Scout'],
+  pistols: ['USP-S', 'Glock-18', 'Desert Eagle'],
+  smgs: ['MP9', 'MAC-10', 'P90'],
+  heavy: ['Nova', 'XM1014'],
 };
 
 export function Footer() {
+  const { t } = useTranslation('footer');
   const navigate = useNavigate();
   const { resetFilters, setWeapons } = useFilterStore();
 
@@ -30,17 +32,17 @@ export function Footer() {
               SkinVault
             </div>
             <p className="text-[#6b6b7b] text-sm leading-relaxed">
-              Самый надёжный маркетплейс скинов CS:GO. Покупайте и продавайте с уверенностью.
+              {t('brand')}
             </p>
           </div>
 
           {/* Marketplace */}
           <div>
-            <h4 className="font-semibold text-white mb-4 font-['Rajdhani'] text-lg">Магазин</h4>
+            <h4 className="font-semibold text-white mb-4 font-['Rajdhani'] text-lg">{t('shop.title')}</h4>
             <ul className="space-y-2">
-              {['Все скины', 'Винтовки', 'Пистолеты', 'Пистолеты-пулемёты', 'Тяжёлое'].map(item => (
-                <li key={item}>
-                  <button onClick={() => handleCategoryClick(item)} className="text-[#6b6b7b] hover:text-[#00d9ff] transition text-sm">{item}</button>
+              {(['all', 'rifles', 'pistols', 'smgs', 'heavy'] as const).map(key => (
+                <li key={key}>
+                  <button onClick={() => handleCategoryClick(key)} className="text-[#6b6b7b] hover:text-[#00d9ff] transition text-sm">{t(`shop.${key}`)}</button>
                 </li>
               ))}
             </ul>
@@ -48,12 +50,12 @@ export function Footer() {
 
           {/* Support */}
           <div>
-            <h4 className="font-semibold text-white mb-4 font-['Rajdhani'] text-lg">Поддержка</h4>
+            <h4 className="font-semibold text-white mb-4 font-['Rajdhani'] text-lg">{t('support.title')}</h4>
             <ul className="space-y-2">
               {[
-                { label: 'FAQ', path: '/faq' },
-                { label: 'Как купить', path: '/faq?section=market' },
-                { label: 'Steam Trade', path: '/faq?section=exchange' },
+                { label: t('support.faq'), path: '/faq' },
+                { label: t('support.howToBuy'), path: '/faq?section=market' },
+                { label: t('support.steamTrade'), path: '/faq?section=exchange' },
               ].map(item => (
                 <li key={item.label}>
                   <button onClick={() => navigate(item.path)} className="text-[#6b6b7b] hover:text-[#00d9ff] transition text-sm">{item.label}</button>
@@ -64,18 +66,18 @@ export function Footer() {
 
           {/* Trust */}
           <div>
-            <h4 className="font-semibold text-white mb-4 font-['Rajdhani'] text-lg">Почему SkinVault?</h4>
+            <h4 className="font-semibold text-white mb-4 font-['Rajdhani'] text-lg">{t('why.title')}</h4>
             <div className="space-y-3">
-              {[
-                { icon: '🔒', label: 'Верификация Steam', desc: 'Все сделки через Steam' },
-                { icon: '⚡', label: 'Мгновенная доставка', desc: 'Обмен за несколько минут' },
-                { icon: '🛡️', label: '1M+ сделок', desc: 'Доверенное сообщество' },
-              ].map(item => (
-                <div key={item.label} className="flex items-start gap-3">
+              {([
+                { icon: '🔒', key: 'steamVerification' },
+                { icon: '⚡', key: 'instantDelivery' },
+                { icon: '🛡️', key: 'deals' },
+              ] as const).map(item => (
+                <div key={item.key} className="flex items-start gap-3">
                   <span className="text-xl">{item.icon}</span>
                   <div>
-                    <div className="text-sm font-medium text-white">{item.label}</div>
-                    <div className="text-xs text-[#6b6b7b]">{item.desc}</div>
+                    <div className="text-sm font-medium text-white">{t(`why.${item.key}.label`)}</div>
+                    <div className="text-xs text-[#6b6b7b]">{t(`why.${item.key}.desc`)}</div>
                   </div>
                 </div>
               ))}
@@ -84,7 +86,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 pt-6 border-t border-[#3a3a5a] flex flex-col tablet:flex-row items-center justify-between gap-4">
-          <p className="text-[#6b6b7b] text-xs">© 2026 SkinVault.</p>
+          <p className="text-[#6b6b7b] text-xs">&copy; 2026 SkinVault.</p>
         </div>
       </div>
     </footer>

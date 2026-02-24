@@ -8,12 +8,14 @@ import { getRarityColor, getQualityColor } from '../../../utils/getRarityColor';
 import { QualityBadge, StatTrakBadge, DiscountBadge, NewBadge } from '../../common/Badge/Badge';
 import { WishlistButton } from '../../wishlist/WishlistButton/WishlistButton';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 interface ProductCardProps {
   product: Product;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const { t } = useTranslation('product');
   const addItem = useCartStore(s => s.addItem);
   const rarityColor = getRarityColor(product.rarity);
 
@@ -21,7 +23,7 @@ export function ProductCard({ product }: ProductCardProps) {
     e.preventDefault();
     e.stopPropagation();
     addItem(product);
-    toast.success(`${product.weapon} | ${product.name} добавлен в корзину`, {
+    toast.success(t('addedToCartName', { name: `${product.weapon} | ${product.name}` }), {
       style: { background: '#1a1a2e', color: '#fff', border: '1px solid #3a3a5a' },
       iconTheme: { primary: '#00ff88', secondary: '#000' },
     });
@@ -109,7 +111,7 @@ export function ProductCard({ product }: ProductCardProps) {
                 className="flex items-center gap-1.5 bg-gradient-to-r from-[#00d9ff] to-[#00ff88] px-3 py-2 rounded-lg text-black font-semibold text-xs hover:shadow-[0_0_15px_rgba(0,217,255,0.4)] transition-all disabled:opacity-50 disabled:cursor-not-allowed shrink-0 whitespace-nowrap"
               >
                 <FiShoppingCart size={13} />
-                {product.inStock ? 'Купить' : 'Продано'}
+                {product.inStock ? t('common:actions.buy') : t('common:actions.sold')}
               </motion.button>
             </div>
           </div>

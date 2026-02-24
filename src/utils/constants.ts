@@ -4,12 +4,12 @@ export const MIN_PRICE = 0;
 export const PRODUCTS_PER_PAGE = 24;
 
 export const SORT_OPTIONS = [
-  { value: 'price_asc', label: 'Цена: по возрастанию' },
-  { value: 'price_desc', label: 'Цена: по убыванию' },
-  { value: 'newest', label: 'Сначала новые' },
-  { value: 'popular', label: 'Популярные' },
-  { value: 'float_asc', label: 'Float: по возрастанию' },
-  { value: 'float_desc', label: 'Float: по убыванию' },
+  'price_asc',
+  'price_desc',
+  'newest',
+  'popular',
+  'float_asc',
+  'float_desc',
 ] as const;
 
 export const QUALITY_OPTIONS = ['FN', 'MW', 'FT', 'WW', 'BS'] as const;

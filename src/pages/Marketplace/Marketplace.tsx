@@ -10,8 +10,10 @@ import { useDebounce } from '../../hooks/useDebounce';
 import { SORT_OPTIONS, PRODUCTS_PER_PAGE } from '../../utils/constants';
 import { FiSearch } from 'react-icons/fi';
 import { AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 export function Marketplace() {
+  const { t } = useTranslation('marketplace');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [page, setPage] = useState(1);
   const {
@@ -73,8 +75,8 @@ export function Marketplace() {
       <div className="max-w-[1600px] mx-auto px-4 laptop:px-8">
         {/* Page header */}
         <div className="mb-6">
-          <h1 className="text-3xl font-bold font-['Rajdhani'] text-white">Маркет</h1>
-          <p className="text-[#6b6b7b] mt-1">{filtered.length.toLocaleString()} скинов доступно</p>
+          <h1 className="text-3xl font-bold font-['Rajdhani'] text-white">{t('title')}</h1>
+          <p className="text-[#6b6b7b] mt-1">{t('skinsAvailable', { count: filtered.length })}</p>
         </div>
 
         {/* Toolbar */}
@@ -85,7 +87,7 @@ export function Marketplace() {
               icon={<FiSearch size={14} />}
               value={localSearch}
               onChange={e => { setLocalSearch(e.target.value); setPage(1); }}
-              placeholder="Поиск скинов, оружия..."
+              placeholder={t('common:search.placeholderExtended')}
             />
           </div>
 
@@ -97,7 +99,7 @@ export function Marketplace() {
               className="appearance-none bg-[#252540] border border-[#3a3a5a] rounded-lg px-4 py-2.5 pr-8 text-sm text-white focus:border-[#00d9ff] outline-none cursor-pointer"
             >
               {SORT_OPTIONS.map(opt => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                <option key={opt} value={opt}>{t(`common:sort.${opt}`)}</option>
               ))}
             </select>
             <FiChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#6b6b7b] pointer-events-none" size={14} />
@@ -109,7 +111,7 @@ export function Marketplace() {
             className="laptop:hidden flex items-center gap-2 px-4 py-2.5 bg-[#252540] border border-[#3a3a5a] rounded-lg text-[#a0a0b0] hover:text-white hover:border-[#00d9ff] transition text-sm"
           >
             <FiSliders size={14} />
-            Фильтры
+            {t('filters')}
             {activeCount > 0 && (
               <span className="px-1.5 py-0.5 bg-[#00d9ff] text-black text-xs rounded-full font-bold">{activeCount}</span>
             )}
@@ -117,7 +119,7 @@ export function Marketplace() {
 
           {/* Results count */}
           <span className="text-sm text-[#6b6b7b] ml-auto hidden tablet:block">
-            Показано {Math.min(paginated.length, filtered.length)} из {filtered.length}
+            {t('shown', { shown: Math.min(paginated.length, filtered.length), total: filtered.length })}
           </span>
         </div>
 
@@ -139,7 +141,7 @@ export function Marketplace() {
                   onClick={() => setPage(p => p + 1)}
                   className="px-8 py-3 bg-[#252540] border border-[#3a3a5a] rounded-xl text-[#a0a0b0] hover:text-white hover:border-[#00d9ff] transition font-medium"
                 >
-                  Загрузить ещё (осталось {filtered.length - paginated.length})
+                  {t('common:actions.loadMore', { count: filtered.length - paginated.length })}
                 </button>
               </div>
             )}
@@ -166,7 +168,7 @@ export function Marketplace() {
               className="fixed bottom-0 left-0 right-0 bg-[#1a1a2e] rounded-t-2xl z-50 max-h-[85vh] overflow-y-auto"
             >
               <div className="flex items-center justify-between p-5 border-b border-[#3a3a5a] sticky top-0 bg-[#1a1a2e] z-10">
-                <h3 className="font-bold text-white font-['Rajdhani'] text-xl">Фильтры</h3>
+                <h3 className="font-bold text-white font-['Rajdhani'] text-xl">{t('common:filter.title')}</h3>
                 <button onClick={() => setSidebarOpen(false)} className="text-[#6b6b7b] hover:text-white">
                   <FiX size={20} />
                 </button>
@@ -179,7 +181,7 @@ export function Marketplace() {
                   onClick={() => setSidebarOpen(false)}
                   className="w-full py-3 bg-gradient-to-r from-[#00d9ff] to-[#00ff88] rounded-xl text-black font-semibold"
                 >
-                  Показать {filtered.length} результатов
+                  {t('common:actions.showResults', { count: filtered.length })}
                 </button>
               </div>
             </motion.div>

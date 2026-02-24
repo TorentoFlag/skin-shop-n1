@@ -3,8 +3,10 @@ import { motion } from 'framer-motion';
 import { FiArrowRight } from 'react-icons/fi';
 import { ProductCard } from '../../components/product/ProductCard/ProductCard';
 import { popularProducts, newProducts } from '../../data/mockProducts';
+import { useTranslation } from 'react-i18next';
 
 export function PopularSkins() {
+  const { t } = useTranslation('home');
   const displayed = popularProducts.length > 0 ? popularProducts : newProducts.slice(0, 8);
 
   return (
@@ -19,14 +21,14 @@ export function PopularSkins() {
           className="flex items-center justify-between mb-8"
         >
           <div>
-            <h2 className="text-3xl font-bold font-['Rajdhani'] text-white">Популярные скины</h2>
-            <p className="text-[#6b6b7b] mt-1">Самые торгуемые позиции на этой неделе</p>
+            <h2 className="text-3xl font-bold font-['Rajdhani'] text-white">{t('popular.title')}</h2>
+            <p className="text-[#6b6b7b] mt-1">{t('popular.subtitle')}</p>
           </div>
           <Link
             to="/marketplace"
             className="flex items-center gap-2 text-[#00d9ff] hover:gap-3 transition-all text-sm font-medium"
           >
-            Смотреть все <FiArrowRight size={16} />
+            {t('common:actions.viewAll')} <FiArrowRight size={16} />
           </Link>
         </motion.div>
 
@@ -56,15 +58,15 @@ export function PopularSkins() {
         >
           <div>
             <h2 className="text-3xl font-bold font-['Rajdhani'] text-white">
-              Новые <span className="gradient-text">поступления</span>
+              {t('newArrivals.title')} <span className="gradient-text">{t('newArrivals.titleAccent')}</span>
             </h2>
-            <p className="text-[#6b6b7b] mt-1">Только что добавлено в магазин</p>
+            <p className="text-[#6b6b7b] mt-1">{t('newArrivals.subtitle')}</p>
           </div>
           <Link
             to="/marketplace"
             className="flex items-center gap-2 text-[#00d9ff] hover:gap-3 transition-all text-sm font-medium"
           >
-            Смотреть все <FiArrowRight size={16} />
+            {t('common:actions.viewAll')} <FiArrowRight size={16} />
           </Link>
         </motion.div>
 
@@ -87,13 +89,13 @@ export function PopularSkins() {
       <section className="py-16 px-6 bg-[#1a1a2e]/50 border-y border-[#3a3a5a]">
         <div className="max-w-[1600px] mx-auto">
           <div className="grid grid-cols-1 tablet:grid-cols-3 gap-6">
-            {[
-              { icon: '🔒', title: 'Защита Steam', desc: 'Все транзакции проверяются через Steam Trade. Ваш аккаунт всегда в безопасности.' },
-              { icon: '⚡', title: 'Мгновенная доставка', desc: 'Получите скины в течение нескольких минут после оплаты. Без ожиданий и задержек.' },
-              { icon: '💎', title: 'Лучшие цены', desc: 'Гарантия минимальной цены. Нашли дешевле? Мы снизим цену.' },
-            ].map(item => (
+            {([
+              { icon: '🔒', key: 'steamProtection' },
+              { icon: '⚡', key: 'instantDelivery' },
+              { icon: '💎', key: 'bestPrices' },
+            ] as const).map(item => (
               <motion.div
-                key={item.title}
+                key={item.key}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -101,8 +103,8 @@ export function PopularSkins() {
               >
                 <div className="text-4xl">{item.icon}</div>
                 <div>
-                  <h3 className="font-bold text-white font-['Rajdhani'] text-lg mb-1">{item.title}</h3>
-                  <p className="text-[#6b6b7b] text-sm leading-relaxed">{item.desc}</p>
+                  <h3 className="font-bold text-white font-['Rajdhani'] text-lg mb-1">{t(`trust.${item.key}.title`)}</h3>
+                  <p className="text-[#6b6b7b] text-sm leading-relaxed">{t(`trust.${item.key}.desc`)}</p>
                 </div>
               </motion.div>
             ))}

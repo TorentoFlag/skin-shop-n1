@@ -5,6 +5,7 @@ import { useFilterStore } from '../../../store/useFilterStore';
 import { getRarityColor, getQualityColor } from '../../../utils/getRarityColor';
 import { formatPrice } from '../../../utils/formatPrice';
 import { QUALITY_OPTIONS, RARITY_OPTIONS, WEAPON_OPTIONS, MAX_PRICE } from '../../../utils/constants';
+import { useTranslation } from 'react-i18next';
 
 function AccordionSection({ title, children, defaultOpen = false }: { title: string; children: React.ReactNode; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
@@ -37,6 +38,7 @@ function AccordionSection({ title, children, defaultOpen = false }: { title: str
 }
 
 export function FilterSidebar() {
+  const { t } = useTranslation();
   const {
     priceRange, setPriceRange,
     qualities, toggleQuality,
@@ -54,7 +56,7 @@ export function FilterSidebar() {
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
-          <h3 className="font-bold text-white font-['Rajdhani'] text-lg">Фильтры</h3>
+          <h3 className="font-bold text-white font-['Rajdhani'] text-lg">{t('filter.title')}</h3>
           {activeCount > 0 && (
             <span className="px-2 py-0.5 bg-[#00d9ff]/20 text-[#00d9ff] text-xs rounded-full border border-[#00d9ff]/30 font-medium">
               {activeCount}
@@ -63,13 +65,13 @@ export function FilterSidebar() {
         </div>
         {activeCount > 0 && (
           <button onClick={resetFilters} className="flex items-center gap-1 text-xs text-[#ff6b6b] hover:text-white transition">
-            <FiX size={12} /> Сбросить
+            <FiX size={12} /> {t('filter.reset')}
           </button>
         )}
       </div>
 
       {/* Price Range */}
-      <AccordionSection title="Диапазон цен" defaultOpen>
+      <AccordionSection title={t('filter.priceRange')} defaultOpen>
         <div className="space-y-3">
           <div className="flex items-center justify-between text-sm text-[#a0a0b0]">
             <span>{formatPrice(priceRange[0])}</span>
@@ -123,7 +125,7 @@ export function FilterSidebar() {
       </AccordionSection>
 
       {/* Quality */}
-      <AccordionSection title="Состояние" defaultOpen>
+      <AccordionSection title={t('filter.quality')} defaultOpen>
         <div className="flex flex-col gap-1.5">
           {QUALITY_OPTIONS.map(q => (
             <label key={q} className="flex items-center gap-3 cursor-pointer group">
@@ -136,7 +138,7 @@ export function FilterSidebar() {
               <input type="checkbox" checked={qualities.includes(q)} onChange={() => toggleQuality(q)} className="hidden" />
               <span className="text-sm" style={{ color: getQualityColor(q as any) }}>{q}</span>
               <span className="text-xs text-[#6b6b7b] group-hover:text-[#a0a0b0] transition">
-                {q === 'FN' ? 'Заводская новая' : q === 'MW' ? 'Немного поношенная' : q === 'FT' ? 'После полевых испытаний' : q === 'WW' ? 'Поношенная' : 'Закалённая в боях'}
+                {t(`filter.qualityLabels.${q}`)}
               </span>
             </label>
           ))}
@@ -144,7 +146,7 @@ export function FilterSidebar() {
       </AccordionSection>
 
       {/* Rarity */}
-      <AccordionSection title="Редкость">
+      <AccordionSection title={t('filter.rarity')}>
         <div className="flex flex-col gap-1.5">
           {RARITY_OPTIONS.map(r => (
             <label key={r} className="flex items-center gap-3 cursor-pointer">
@@ -165,7 +167,7 @@ export function FilterSidebar() {
       </AccordionSection>
 
       {/* Weapons */}
-      <AccordionSection title="Оружие">
+      <AccordionSection title={t('filter.weapons')}>
         <div className="flex flex-col gap-1 max-h-48 overflow-y-auto pr-1">
           {WEAPON_OPTIONS.map(w => (
             <label key={w} className="flex items-center gap-3 cursor-pointer py-0.5">
@@ -182,10 +184,10 @@ export function FilterSidebar() {
       </AccordionSection>
 
       {/* Toggles */}
-      <AccordionSection title="Прочее">
+      <AccordionSection title={t('filter.other')}>
         <div className="space-y-3">
           <label className="flex items-center justify-between cursor-pointer">
-            <span className="text-sm text-[#a0a0b0]">Только StatTrak™</span>
+            <span className="text-sm text-[#a0a0b0]">{t('filter.statTrakOnly')}</span>
             <div
               onClick={() => setStatTrakOnly(!statTrakOnly)}
               className={`w-11 h-6 rounded-full transition-all duration-200 relative cursor-pointer flex-shrink-0 ${statTrakOnly ? 'bg-[#e4ae39]' : 'bg-[#3a3a5a]'}`}
@@ -194,7 +196,7 @@ export function FilterSidebar() {
             </div>
           </label>
           <label className="flex items-center justify-between cursor-pointer">
-            <span className="text-sm text-[#a0a0b0]">Только в наличии</span>
+            <span className="text-sm text-[#a0a0b0]">{t('filter.inStockOnly')}</span>
             <div
               onClick={() => setInStockOnly(!inStockOnly)}
               className={`w-11 h-6 rounded-full transition-all duration-200 relative cursor-pointer flex-shrink-0 ${inStockOnly ? 'bg-[#00ff88]' : 'bg-[#3a3a5a]'}`}

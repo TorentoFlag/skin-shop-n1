@@ -10,8 +10,10 @@ import { QualityBadge, RarityBadge, StatTrakBadge } from '../../components/commo
 import { formatPriceFull } from '../../utils/formatPrice';
 import { getRarityColor, getQualityColor, getQualityLabel } from '../../utils/getRarityColor';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 export function ProductDetail() {
+  const { t } = useTranslation('product');
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const product = allProducts.find(p => p.id === id);
@@ -22,10 +24,10 @@ export function ProductDetail() {
     return (
       <div className="min-h-screen pt-[90px] flex flex-col items-center justify-center text-center px-4">
         <div className="text-6xl mb-4">😕</div>
-        <h2 className="text-2xl font-bold text-white mb-2">Скин не найден</h2>
-        <p className="text-[#6b6b7b] mb-6">Этот скин мог быть продан или удалён.</p>
+        <h2 className="text-2xl font-bold text-white mb-2">{t('notFound.title')}</h2>
+        <p className="text-[#6b6b7b] mb-6">{t('notFound.desc')}</p>
         <button onClick={() => navigate('/marketplace')} className="px-6 py-3 bg-gradient-to-r from-[#00d9ff] to-[#00ff88] rounded-xl text-black font-semibold">
-          Вернуться в магазин
+          {t('notFound.action')}
         </button>
       </div>
     );
@@ -37,7 +39,7 @@ export function ProductDetail() {
   function handleBuy() {
     addItem(product!);
     setCartOpen(true);
-    toast.success('Добавлено в корзину!', {
+    toast.success(t('addedToCart'), {
       style: { background: '#1a1a2e', color: '#fff', border: '1px solid #3a3a5a' },
     });
   }
@@ -53,16 +55,16 @@ export function ProductDetail() {
       <div className="max-w-[1400px] mx-auto">
         {/* Breadcrumbs */}
         <div className="flex items-center gap-2 text-sm text-[#6b6b7b] mb-6">
-          <Link to="/" className="hover:text-[#00d9ff] transition">Главная</Link>
+          <Link to="/" className="hover:text-[#00d9ff] transition">{t('breadcrumbs.home')}</Link>
           <span>/</span>
-          <Link to="/marketplace" className="hover:text-[#00d9ff] transition">Маркетплейс</Link>
+          <Link to="/marketplace" className="hover:text-[#00d9ff] transition">{t('breadcrumbs.marketplace')}</Link>
           <span>/</span>
           <span className="text-[#a0a0b0]">{product.weapon} | {product.name}</span>
         </div>
 
         {/* Back button */}
         <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-[#a0a0b0] hover:text-white transition mb-6">
-          <FiArrowLeft size={16} /> Назад
+          <FiArrowLeft size={16} /> {t('common:actions.back')}
         </button>
 
         {/* Main layout */}
@@ -108,7 +110,7 @@ export function ProductDetail() {
                 <RarityBadge rarity={product.rarity} />
                 {product.statTrak && <StatTrakBadge />}
                 {!product.inStock && (
-                  <span className="px-2 py-0.5 bg-[#ff4444]/20 text-[#ff4444] text-xs rounded-md border border-[#ff4444]/30">Нет в наличии</span>
+                  <span className="px-2 py-0.5 bg-[#ff4444]/20 text-[#ff4444] text-xs rounded-md border border-[#ff4444]/30">{t('common:product.outOfStock')}</span>
                 )}
               </div>
             </div>
@@ -121,7 +123,7 @@ export function ProductDetail() {
               {product.originalPrice && (
                 <div className="flex items-center gap-2 mt-1">
                   <span className="text-[#6b6b7b] line-through text-sm">{formatPriceFull(product.originalPrice)}</span>
-                  <span className="text-[#00ff88] text-sm font-medium">-{product.discount}% off</span>
+                  <span className="text-[#00ff88] text-sm font-medium">{t('off', { discount: product.discount })}</span>
                 </div>
               )}
             </div>
@@ -129,10 +131,10 @@ export function ProductDetail() {
             {/* Characteristics */}
             <div className="grid grid-cols-2 gap-3">
               {[
-                { label: 'Состояние', value: getQualityLabel(product.quality) },
-                { label: 'Значение флоата', value: product.float.toFixed(6) },
-                { label: 'Редкость', value: product.rarity },
-                { label: 'Коллекция', value: product.collection || 'Неизвестно' },
+                { label: t('characteristics.condition'), value: getQualityLabel(product.quality) },
+                { label: t('characteristics.floatValue'), value: product.float.toFixed(6) },
+                { label: t('characteristics.rarity'), value: product.rarity },
+                { label: t('characteristics.collection'), value: product.collection || t('common:product.unknown') },
               ].map(item => (
                 <div key={item.label} className="p-3 bg-[#252540] rounded-xl border border-[#3a3a5a]">
                   <div className="text-xs text-[#6b6b7b] mb-1">{item.label}</div>
@@ -172,7 +174,7 @@ export function ProductDetail() {
                 className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-[#00d9ff] to-[#00ff88] py-4 rounded-xl text-black font-bold text-lg hover:shadow-[0_0_25px_rgba(0,217,255,0.4)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <FiShoppingCart size={20} />
-                {product.inStock ? `Купить — ${formatPriceFull(product.price)}` : 'Нет в наличии'}
+                {product.inStock ? t('buyFor', { price: formatPriceFull(product.price) }) : t('common:product.outOfStock')}
               </motion.button>
               <WishlistButton product={product} size="lg" />
             </div>
@@ -181,13 +183,13 @@ export function ProductDetail() {
             {product.inStock && (
               <p className="text-[#00ff88] text-sm flex items-center gap-2">
                 <span className="w-2 h-2 bg-[#00ff88] rounded-full animate-pulse" />
-                В наличии • Мгновенная доставка
+                {t('inStockDelivery')}
               </p>
             )}
 
             {/* Steam link */}
             <a href="#" className="flex items-center gap-2 text-[#6b6b7b] hover:text-[#00d9ff] transition text-sm">
-              <FiExternalLink size={14} /> Смотреть на Steam Market
+              <FiExternalLink size={14} /> {t('common:actions.viewOnSteam')}
             </a>
           </motion.div>
         </div>
@@ -200,14 +202,14 @@ export function ProductDetail() {
             transition={{ delay: 0.3 }}
             className="mb-12 p-6 bg-[#1a1a2e] rounded-2xl border border-[#3a3a5a]"
           >
-            <h2 className="text-xl font-bold font-['Rajdhani'] text-white mb-6">История цен (30 дней)</h2>
+            <h2 className="text-xl font-bold font-['Rajdhani'] text-white mb-6">{t('priceHistory')}</h2>
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={product.priceHistory}>
                 <XAxis dataKey="date" tick={{ fill: '#6b6b7b', fontSize: 11 }} tickLine={false} axisLine={false} interval={6} />
                 <YAxis tick={{ fill: '#6b6b7b', fontSize: 11 }} tickLine={false} axisLine={false} tickFormatter={v => `€${v.toFixed(0)}`} />
                 <Tooltip
                   contentStyle={{ background: '#252540', border: '1px solid #3a3a5a', borderRadius: '8px', color: '#fff' }}
-                  formatter={(val: number | undefined) => [`€${(val ?? 0).toFixed(2)}`, 'Цена']}
+                  formatter={(val: number | undefined) => [`€${(val ?? 0).toFixed(2)}`, t('priceLabel')]}
                 />
                 <Line type="monotone" dataKey="price" stroke="#00d9ff" strokeWidth={2} dot={false} activeDot={{ r: 4, fill: '#00d9ff' }} />
               </LineChart>
@@ -218,7 +220,7 @@ export function ProductDetail() {
         {/* Similar skins */}
         {similarProducts.length > 0 && (
           <div>
-            <h2 className="text-2xl font-bold font-['Rajdhani'] text-white mb-6">Похожие скины</h2>
+            <h2 className="text-2xl font-bold font-['Rajdhani'] text-white mb-6">{t('similarSkins')}</h2>
             <div className="grid grid-cols-2 laptop:grid-cols-4 gap-4">
               {similarProducts.map(p => (
                 <div key={p.id}><ProductCard product={p} /></div>
